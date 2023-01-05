@@ -9,7 +9,7 @@ define('DB_NAME', '');
 define('APPROOT', dirname(dirname(__FILE__)));
 
 // URL Root
-define('URLROOT', 'http://localhost/UserControlMVC');
+define('URLROOT', 'http://localhost/userctrl');
 
 // Site Name
-define('SITENAME', 'UserCtrl');
+define('SITENAME', 'userctrl');

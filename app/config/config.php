@@ -5,11 +5,11 @@ define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', '');
 
-// App Root
+// App Root -> C:\xampp\htdocs\userctrl\app
 define('APPROOT', dirname(dirname(__FILE__)));
 
 // URL Root
 define('URLROOT', 'http://localhost/userctrl');
 
 // Site Name
-define('SITENAME', 'userctrl');
+define('SITENAME', 'UserCtrl');

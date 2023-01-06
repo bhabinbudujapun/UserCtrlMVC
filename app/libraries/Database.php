@@ -7,7 +7,7 @@ class Database
     private $dbname = DB_NAME;
 
     private $dbh;
-    private $stmt;
+    // private $stmt;
     private $error;
 
     public function __construct()
@@ -26,17 +26,5 @@ class Database
             $this->error = $e->getMessage();
             echo $this->error;
         }
-    }
-
-    // Prepare statement with query
-    public function query($sql)
-    {
-        $this->stmt = $this->dbh->prepare($sql);
-    }
-
-    // Execute the prepared statement
-    public function execute()
-    {
-        return $this->stmt->execute();
     }
 }

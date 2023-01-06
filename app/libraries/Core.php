@@ -22,6 +22,7 @@ class Core
         }
 
         //TEST
+        // var_dump($this->currentMethod);
         // var_dump($this->currentController);
         // die;
 
@@ -30,7 +31,6 @@ class Core
 
         // Instantiate controller class
         $this->currentController = new $this->currentController;
-
 
         // Check for second part of url
         if (isset($url[1])) {
@@ -42,6 +42,11 @@ class Core
             }
         }
 
+        // TESTS ONLY
+        // var_dump($this->currentMethod);
+        // var_dump($this->currentController);
+        // die;
+
         // Check the para
         if (isset($url[2])) {
             $this->params = $url[2];
@@ -50,6 +55,16 @@ class Core
         }
         // var_dump($this->currentController);
         // die;
+        // Get params
+        $this->params = $url ? array_values($url) : [];
+
+        // TESTS ONLY
+        // var_dump($this->currentMethod);
+        // var_dump($this->currentController);
+        // die;
+
+        // Call a callback with array of params
+        call_user_func_array([$this->currentController, $this->currentMethod], $this->params);
     }
 
     public function getUrl()

@@ -1,5 +1,4 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<h2>Welome, to pages ADMIN->register.php</h2>
 <div class="row">
     <div class="col-md-6 mx-auto">
         <div class="card bg-light mt-5">
@@ -9,25 +8,25 @@
             </div>
 
             <div class="card-body">
-                <form method="post" action="<?php echo URLROOT; ?>/users/register">
+                <form method="post" action="<?php echo URLROOT; ?>/admin/register">
                     <div class="form-group">
                         <label for="name">Name<sub>*</sub></label>
-                        <input type="text" name="name" class="form-control form-control-lg">
+                        <input type="text" name="name" class="form-control form-control-lg" required>
                     </div>
 
                     <div class="form-group">
                         <label for="email">Email<sub>*</sub></label>
-                        <input type="email" name="email" class="form-control form-control-lg">
+                        <input type="email" name="email" class="form-control form-control-lg" required>
                     </div>
 
                     <div class="form-group">
                         <label for="password">Password<sub>*</sub></label>
-                        <input type="password" name="password" class="form-control form-control-lg">
+                        <input type="password" name="password" class="form-control form-control-lg" required>
                     </div>
 
                     <div class="form-group">
                         <label for="confirm_password">Confirm Password<sub>*</sub></label>
-                        <input type="password" name="confirm_password" class="form-control form-control-lg">
+                        <input type="password" name="confirm_password" class="form-control form-control-lg" required>
                     </div>
                     <div class="form-group">
                         <div class="row">

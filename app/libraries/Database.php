@@ -6,9 +6,8 @@ class Database
     private $pass = DB_PASS;
     private $dbname = DB_NAME;
 
-    private $dbh;
-    // private $stmt;
-    private $error;
+    protected $dbh;
+    protected $stmt;
 
     public function __construct()
     {
@@ -23,8 +22,33 @@ class Database
         try {
             $this->dbh = new PDO($dsn, $this->user, $this->pass, $options);
         } catch (PDOException $e) {
-            $this->error = $e->getMessage();
-            echo $this->error;
+            die('Error: ' . $e->getMessage());
         }
+    }
+
+    // Prepare statement with query
+    public function query($sql, $params)
+    {
+        $this->stmt = $this->dbh->prepare($sql);
+        if (!empty($params)) {
+            foreach ($params as $param => $value) {
+                $this->stmt->bindValue($param, $value);
+            }
+        }
+        // return $this->stmt;
+        // $this->stmt->$this->execute();
+        $this->stmt->execute();
+    }
+
+    // Execute the prepared statement
+    // public function execute()
+    // {
+    //     $this->stmt->execute();
+    // }
+
+    // Get row count
+    public function rowCount()
+    {
+        return $this->stmt->rowCount();
     }
 }

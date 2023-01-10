@@ -3,43 +3,27 @@
 class Admin extends Controller
 {
 
-    // protected $adminModel;
+    protected $rootModel;
 
-    // public function __construct()
-    // {
-    //     $this->adminModel = $this->model('Admin');
-    // }
+    public function __construct()
+    {
+        $this->rootModel = $this->model('Root');
+    }
 
     public function register()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // $user = '';
-            // if (count($_POST)) {
-            //     $email = $_POST['email'];
-            //     $password = md5($_POST['password']);
-            //     $stmt = $this->conn->prepare("SELECT * FROM $this->table WHERE
-            //     email = :email AND password = :password");
-
-            //     $stmt->execute([
-            //         ':email' => $email,
-            //         ':password' => $password
-            //     ]);
-
-            //     $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            // }
-            // if ($user)
-            //     return $user;
-            // else
-            //     return $user;
-
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $confirm_password = $_POST['confirm_password'];
-            echo $name . ' ' . $email . ' ' . $password . ' ' . $confirm_password;
-            die;
-            $data = [$name, $email, $password, $confirm_password];
-            // $this->adminModel->register($data);
+            $_POST = filter_input_array(INPUT_POST);
+            $data = [
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+                'password' => $_POST['password'],
+                'confirm_password' => $_POST['confirm_password']
+            ];
+            if ($data['password'] == $data['confirm_password']) {
+                $this->rootModel->register($data);
+            } else {
+            }
         } else {
             $this->view('admin/register');
         }
@@ -56,7 +40,9 @@ class Admin extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];
-            echo $email . '<br>' . $password;
+            // echo $email . '<br>' . $password;
+            $data = [$email, $password];
+            $this->rootModel->login($data);
         } else {
             // echo 'login else part';
             // die;

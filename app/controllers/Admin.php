@@ -31,22 +31,37 @@ class Admin extends Controller
 
     public function login()
     {
-        $data = [
-            'title' => 'Login',
-            'description' => 'User Control System built on top of the MVC framework',
-            'info' => 'User Control System built on top of the',
-        ];
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];
-            // echo $email . '<br>' . $password;
-            $data = [$email, $password];
-            $this->rootModel->login($data);
+            $loginUser =  $this->rootModel->login($email, $password);
+
+            if ($loginUser) {
+                $this->createSession($loginUser);
+            } else {
+                $this->view('admin/login');
+            }
         } else {
-            // echo 'login else part';
-            // die;
-            $this->view('admin/login', $data);
+            $this->view('admin/login');
         }
+    }
+
+    // Set the session
+    public function createSession($user)
+    {
+        $_SESSION['user_id'] = $user->id;
+        $_SESSION['name'] = $user->name;
+        $_SESSION['email'] = $user->email;
+        redirect('users/index');
+    }
+
+    // Destroy the session
+    public function logout()
+    {
+        unset($_SESSION['user_id']);
+        unset($_SESSION['name']);
+        unset($_SESSION['email']);
+        session_destroy();
+        redirect('admin/login');
     }
 }

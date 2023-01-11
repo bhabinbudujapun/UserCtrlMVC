@@ -6,8 +6,8 @@ class Database
     private $pass = DB_PASS;
     private $dbname = DB_NAME;
 
-    protected $dbh;
-    protected $stmt;
+    private $dbh;
+    private $stmt;
 
     public function __construct()
     {
@@ -27,28 +27,32 @@ class Database
     }
 
     // Prepare statement with query
-    public function query($sql, $params)
+    public function query($sql)
     {
         $this->stmt = $this->dbh->prepare($sql);
-        if (!empty($params)) {
-            foreach ($params as $param => $value) {
-                $this->stmt->bindValue($param, $value);
-            }
-        }
-        // return $this->stmt;
-        // $this->stmt->$this->execute();
-        $this->stmt->execute();
+    }
+
+    // Bind statement with query
+    public function bind($param, $value)
+    {
+        $this->stmt->bindValue($param, $value);
     }
 
     // Execute the prepared statement
-    // public function execute()
-    // {
-    //     $this->stmt->execute();
-    // }
+    public function execute()
+    {
+        return $this->stmt->execute();
+    }
+
+    public function singleResult()
+    {
+        $this->execute();
+        return $this->stmt->fetch(PDO::FETCH_OBJ);
+    }
 
     // Get row count
-    public function rowCount()
-    {
-        return $this->stmt->rowCount();
-    }
+    // public function rowCount()
+    // {
+    //     return $this->stmt->rowCount();
+    // }
 }

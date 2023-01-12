@@ -7,9 +7,15 @@
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="<?php echo URLROOT; ?>">Home</a>
-                </li>
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo URLROOT; ?>/users">Home</a>
+                    </li>
+                <?php else : ?>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo URLROOT; ?>">Home</a>
+                    </li>
+                <?php endif; ?>
                 <li class="nav-item">
                     <a class="nav-link" href="<?php echo URLROOT; ?>/pages/about">About</a>
                 </li>
@@ -24,7 +30,7 @@
                         <a class="nav-link" href="#">Welcome <?php echo $_SESSION['name']; ?></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo URLROOT; ?>/users/logout">Logout</a>
+                        <a class="nav-link" href="<?php echo URLROOT; ?>/admin/logout">Logout</a>
                     </li>
                 <?php else : ?>
                     <li class="nav-item">
@@ -33,8 +39,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URLROOT; ?>/admin/login">Login</a>
                     </li>
+                <?php endif; ?>
             </ul>
-        <?php endif; ?>
 
         </div>
     </div>

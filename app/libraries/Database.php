@@ -50,6 +50,11 @@ class Database
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
+    public function resultSet(){
+        $this->execute();
+        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     // Get row count
     // public function rowCount()
     // {

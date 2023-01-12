@@ -1,7 +1,7 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
 <div class="container d-flex justify-content-center">
-    <table class="table">
+    <table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th scope="col">#</th>
@@ -16,23 +16,23 @@
         </thead>
         <tbody>
             <?php
-            for ($i = 1; $i < 3; $i++) {
+            foreach ($data as $user) {
             ?>
                 <tr>
-                    <td> <?php echo $i; ?> </td>
-                    <td> admin </td>
-                    <td> Male </td>
-                    <td> admin@gmail.com </td>
-                    <td> Kathmandu </td>
-                    <td> Yes </td>
-                    <td> 2023-01-10 12:05:59 </td>
+                    <td> <?php echo $user->id; ?> </td>
+                    <td> <?php echo $user->name; ?> </td>
+                    <td> <?php echo $user->gender; ?> </td>
+                    <td> <?php echo $user->email; ?> </td>
+                    <td> <?php echo $user->address; ?> </td>
+                    <td> <?php echo $user->marital_status; ?> </td>
+                    <td> <?php echo $user->created_at; ?> </td>
                     <td>
                         <div class="container">
                             <div class="row">
                                 <!-- <div class="col-md-12"> -->
-                                <a href="#" class="btn btn-info float-right">view</a>
-                                <a href="#" class="btn btn-primary float-right">Edit</a>
-                                <a href="#" class="btn btn-danger float-right">Delete</a>
+                                <a href="<?php echo URLROOT; ?>/users/show" class="btn btn-info float-right">view</a>
+                                <a href="<?php echo URLROOT; ?>/users/edit" class="btn btn-primary float-right">Edit</a>
+                                <a href="<?php echo URLROOT; ?>/users/delete" class="btn btn-danger float-right">Delete</a>
                                 <!-- </div> -->
                             </div>
                         </div>
@@ -43,7 +43,7 @@
         <tfoot>
             <tr>
                 <td colspan="1">
-                    <a href="#" class="btn btn-success">Add</a>
+                    <a href="<?php echo URLROOT; ?>/users/add" class="btn btn-success">Add</a>
                 </td>
             </tr>
         </tfoot>

@@ -21,8 +21,11 @@ class Admin extends Controller
                 'confirm_password' => $_POST['confirm_password']
             ];
             if ($data['password'] == $data['confirm_password']) {
-                $this->rootModel->register($data);
+                if ($this->rootModel->register($data)) {
+                    redirect('admin/login');
+                }
             } else {
+                $this->view('admin/register');
             }
         } else {
             $this->view('admin/register');

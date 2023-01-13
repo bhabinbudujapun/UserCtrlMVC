@@ -35,4 +35,15 @@ class User
             return false;
         }
     }
+
+    public function deleteUser($id)
+    {
+        $this->dbh->query("DELETE FROM user WHERE id=:id");
+        $this->dbh->bind(':id', $id);
+        if ($this->dbh->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

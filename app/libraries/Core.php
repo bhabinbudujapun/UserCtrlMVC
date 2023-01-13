@@ -56,6 +56,9 @@ class Core
         // var_dump($this->currentController);
         // die;
         // Get params
+        // $val = $this->params;
+        // echo $val;
+        // die;
         $this->params = $url ? array_values($url) : [];
 
         // TESTS ONLY

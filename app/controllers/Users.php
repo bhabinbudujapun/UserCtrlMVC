@@ -41,4 +41,21 @@ class Users extends Controller
             $this->view('users/add');
         }
     }
+
+    public function delete($id = null)
+    {
+        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        //     die("IF PART");
+        //     if ($this->userModel->deleteUser($_POST['id'])) {
+        //         redirect('users');
+        //     } else {
+        //         die;
+        //     }
+        // } else {
+        //     die("DETELE ELSE PART");
+        //     $this->view('users/index');
+        // }
+        echo $_POST['id'];
+        echo 'DELETE USER';
+    }
 }

@@ -42,20 +42,39 @@ class Users extends Controller
         }
     }
 
-    public function delete($id = null)
+    public function edit()
     {
-        // if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        //     die("IF PART");
-        //     if ($this->userModel->deleteUser($_POST['id'])) {
-        //         redirect('users');
-        //     } else {
-        //         die;
-        //     }
-        // } else {
-        //     die("DETELE ELSE PART");
-        //     $this->view('users/index');
-        // }
-        echo $_POST['id'];
-        echo 'DELETE USER';
+        // echo 'hello';
+        // die;
+        if (['REQUEST_METHOD'] == 'POST') {
+            echo 'hello88';
+            die;
+            $data = [
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+                'gender' => $_POST['gender'],
+                'address' => $_POST['address'],
+                'marital_status' => $_POST['married'],
+            ];
+            $this->userModel->editUser($data);
+            die;
+        } else {
+            // echo 'hello77';
+            // die;
+            $this->view('users/edit');
+        }
+    }
+
+    public function delete()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->userModel->deleteUser($_POST['id'])) {
+                redirect('users');
+            } else {
+                die;
+            }
+        } else {
+            redirect('users');
+        }
     }
 }

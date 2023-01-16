@@ -36,6 +36,13 @@ class User
         }
     }
 
+    public function editUser($data)
+    {
+        foreach ($data as $value) {
+            echo $value . '<br>';
+        }
+    }
+
     public function deleteUser($id)
     {
         $this->dbh->query("DELETE FROM user WHERE id=:id");

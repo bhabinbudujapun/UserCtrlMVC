@@ -48,11 +48,11 @@ class Core
         // die;
 
         // Check the para
-        if (isset($url[2])) {
-            $this->params = $url[2];
-            // Unset 2 index;
-            unset($url[2]);
-        }
+        // if (isset($url[2])) {
+        //     $this->params = $url[2];
+        //     // Unset 2 index;
+        //     unset($url[2]);
+        // }
         // var_dump($this->currentController);
         // die;
         // Get params
@@ -64,6 +64,8 @@ class Core
         // TESTS ONLY
         // var_dump($this->currentMethod);
         // var_dump($this->currentController);
+        // var_dump($this->params);
+        // echo $this->params;
         // die;
 
         // Call a callback with array of params

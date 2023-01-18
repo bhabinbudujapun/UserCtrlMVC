@@ -10,21 +10,12 @@ class Core
     {
         $url = $this->getUrl();
 
-        //TEST
-        // var_dump($url);
-        // die;
-
         // Look in controllers for first value
         if (isset($url[0]) && file_exists('./app/controllers/' . ucwords($url[0]) . '.php')) {
             $this->currentController = ucwords($url[0]);
             // Unset 0 Index
             unset($url[0]);
         }
-
-        //TEST
-        // var_dump($this->currentMethod);
-        // var_dump($this->currentController);
-        // die;
 
         // Require the controller
         require './app/controllers/' . $this->currentController . '.php';
@@ -42,31 +33,7 @@ class Core
             }
         }
 
-        // TESTS ONLY
-        // var_dump($this->currentMethod);
-        // var_dump($this->currentController);
-        // die;
-
-        // Check the para
-        // if (isset($url[2])) {
-        //     $this->params = $url[2];
-        //     // Unset 2 index;
-        //     unset($url[2]);
-        // }
-        // var_dump($this->currentController);
-        // die;
-        // Get params
-        // $val = $this->params;
-        // echo $val;
-        // die;
         $this->params = $url ? array_values($url) : [];
-
-        // TESTS ONLY
-        // var_dump($this->currentMethod);
-        // var_dump($this->currentController);
-        // var_dump($this->params);
-        // echo $this->params;
-        // die;
 
         // Call a callback with array of params
         call_user_func_array([$this->currentController, $this->currentMethod], $this->params);

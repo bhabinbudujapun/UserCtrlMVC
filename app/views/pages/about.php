@@ -1,5 +1,4 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<!-- <h2>Welome, to pages PAGES->index.php</h2> -->
 
 <div class="jumbotron jumbotron-fluid text-center">
     <div class="container">

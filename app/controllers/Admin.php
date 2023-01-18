@@ -55,7 +55,7 @@ class Admin extends Controller
         $_SESSION['user_id'] = $user->id;
         $_SESSION['name'] = $user->name;
         $_SESSION['email'] = $user->email;
-        redirect('users/index');
+        redirect('users');
     }
 
     // Destroy the session

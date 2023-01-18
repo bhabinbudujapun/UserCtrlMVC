@@ -8,36 +8,51 @@
             </div>
 
             <div class="card-body">
-                <form method="post" action="<?php echo URLROOT; ?>/users/edit">
+                <form action="<?php echo URLROOT; ?>/users/edit/<?php echo $data->id ?>" method="POST">
                     <div class="form-group">
-                        <label for="name">Name<sub>*</sub></label>
-                        <input type="text" name="name" class="form-control form-control-lg" required>
+                        <label for="name">Name</label>
+                        <input type="text" name="name" value="<?php echo $data->name; ?>" class="form-control form-control-lg">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email<sub>*</sub></label>
-                        <input type="email" name="email" class="form-control form-control-lg" required>
+                        <label for="email">Email</label>
+                        <input type="email" name="email" value="<?php echo $data->email; ?>" class="form-control form-control-lg" required>
                     </div>
                     <div class="form-group">
-                        <label for="address">Address<sub>*</sub></label>
-                        <input type="text" name="address" class="form-control form-control-lg" required>
+                        <label for="address">Address</label>
+                        <input type="text" name="address" value="<?php echo $data->address; ?>" class="form-control form-control-lg" required>
                     </div>
                     <div class="form-group">
-                        <p>Gender<sub>*</sub></p>
-                        <input type="radio" id="Male" name="gender" value='Male' checked>
-                        <label for="Male">Male</label><br>
-                        <input type="radio" id="Female" name="gender" value="Female">
-                        <label for="Female">Female</label>
+                        <p>Gender</p>
+                        <?php if ($data->gender == "Male") { ?>
+                            <input type="radio" id="Male" name="gender" value="Male" checked>
+                            <label for="Male">Male</label><br>
+                            <input type="radio" id="Female" name="gender" value="Female">
+                            <label for="Female">Female</label>
+                        <?php } else { ?>
+                            <input type="radio" id="Male" name="gender" value="Male">
+                            <label for="Male">Male</label><br>
+                            <input type="radio" id="Female" name="gender" value="Female" checked>
+                            <label for="Female">Female</label>
+                        <?php } ?>
                     </div>
                     <div class="form-group">
-                        <p>Married<sub>*</sub></p>
-                        <input type="radio" id="Yes" name="married" value="Yes" checked>
-                        <label for="Yes">Yes</label><br>
-                        <input type="radio" id="No" name="married" value="No">
-                        <label for="No">No</label>
+                        <p>Married</p>
+                        <?php if ($data->marital_status == "Yes") { ?>
+                            <input type="radio" id="Yes" name="married" value="Yes" checked>
+                            <label for="Yes">Yes</label><br>
+                            <input type="radio" id="No" name="married" value="No">
+                            <label for="No">No</label>
+                        <?php } else { ?>
+                            <input type="radio" id="Yes" name="married" value="Yes">
+                            <label for="Yes">Yes</label><br>
+                            <input type="radio" id="No" name="married" value="No" checked>
+                            <label for="No">No</label>
+                        <?php } ?>
                     </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col">
+                                <input type="hidden" name='id' value="<?php $data->id; ?>">
                                 <input type="submit" class="btn btn-success btn-block pull-left" value="Update">
                             </div>
                             <div class="col">

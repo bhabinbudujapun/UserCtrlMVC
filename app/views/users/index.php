@@ -32,7 +32,7 @@
                         <div class="container">
                             <div class="row">
                                 <a data-toggle="modal" data-target="#viewModal" data-id="<?php echo $id; ?>" data-name="<?php echo $user->name; ?>" data-gender="<?php echo $user->gender; ?>" data-email="<?php echo $user->email; ?>" data-address="<?php echo $user->address; ?>" data-married="<?php echo $user->marital_status; ?>" data-created="<?php echo $user->created_at; ?>" class="btn btn-info float-right view">View</a>
-                                <a href="<?php echo URLROOT; ?>/users/edit/<?php echo $user->id; ?>" class="btn btn-primary">Edit</a>
+                                <a href="<?php echo URLROOT; ?>/users/edit/<?php echo $user->id ?>" class="btn btn-primary">Edit</a>
                                 <form class="pull-right" action="<?php echo URLROOT; ?>/users/delete/<?php echo $user->id; ?>" method="post">
                                     <input type="hidden" name='id' value="<?php echo $user->id; ?>">
                                     <button type="submit" class="btn btn-danger btn-block">Delete</button>

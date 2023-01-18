@@ -13,6 +13,16 @@ class User
         $result = $this->dbh->resultSet();
         return $result;
     }
+
+    public function getSingleUser($id)
+    {
+        $this->dbh->query("SELECT * FROM user WHERE id = :id");
+        $this->dbh->bind(':id', $id);
+
+        $result = $this->dbh->singleResult();
+        return $result;
+    }
+
     public function addUser($data)
     {
         $name = $data['name'];
@@ -38,8 +48,25 @@ class User
 
     public function editUser($data)
     {
-        foreach ($data as $value) {
-            echo $value . '<br>';
+        $id = $data['id'];
+        $name = $data['name'];
+        $email = $data['email'];
+        $gender = $data['gender'];
+        $address = $data['address'];
+        $marital_status = $data['marital_status'];
+
+        $this->dbh->query("UPDATE user SET name = :name, gender = :gender, email = :email, address = :address, marital_status = :marital_status WHERE id = :id");
+        $this->dbh->bind(':id', $id);
+        $this->dbh->bind(':name', $name);
+        $this->dbh->bind(':gender', $gender);
+        $this->dbh->bind(':email', $email);
+        $this->dbh->bind(':address', $address);
+        $this->dbh->bind(':marital_status', $marital_status);
+
+        if ($this->dbh->execute()) {
+            return true;
+        } else {
+            return false;
         }
     }
 

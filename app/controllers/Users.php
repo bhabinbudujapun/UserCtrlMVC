@@ -42,26 +42,25 @@ class Users extends Controller
         }
     }
 
-    public function edit()
+    public function edit($id)
     {
-        // echo 'hello';
-        // die;
-        if (['REQUEST_METHOD'] == 'POST') {
-            echo 'hello88';
-            die;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $data = [
+                'id' => $id,
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
                 'gender' => $_POST['gender'],
                 'address' => $_POST['address'],
                 'marital_status' => $_POST['married'],
             ];
-            $this->userModel->editUser($data);
-            die;
+            if ($this->userModel->editUser($data)) {
+                redirect('users');
+            } else {
+                die;
+            }
         } else {
-            // echo 'hello77';
-            // die;
-            $this->view('users/edit');
+            $data = $this->userModel->getSingleUser($id);
+            $this->view('users/edit', $data);
         }
     }
 

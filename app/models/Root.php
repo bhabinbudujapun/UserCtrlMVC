@@ -11,18 +11,15 @@ class Root
     public function register($data)
     {
         $name = $data['name'];
-        $gender = $data['gender'];
         $email = $data['email'];
-        $address = $data['address'];
-        $marital_status = $data['marital_status'];
+        $password = password_hash($data['password'], PASSWORD_DEFAULT);
+        // $password  = $data['password'];
         $created_at = date("Y-m-d H:i:s");
 
-        $this->dbh->query('INSERT INTO users (name, gender, email, address, marital_status, created_at) VALUES (:name, :gender, :email, :address, :marital_status, :created_at)');
+        $this->dbh->query('INSERT INTO admin (name, email, password, created_at) VALUES (:name, :email, :password, :created_at)');
         $this->dbh->bind(':name', $name);
-        $this->dbh->bind(':gender', $gender);
         $this->dbh->bind(':email', $email);
-        $this->dbh->bind(':address', $address);
-        $this->dbh->bind(':marital_status', $marital_status);
+        $this->dbh->bind(':password', $password);
         $this->dbh->bind(':created_at', $created_at);
 
         if ($this->dbh->execute()) {
@@ -41,7 +38,8 @@ class Root
         $row = $this->dbh->singleResult();
         if (!empty($row)) {
             $db_password = $row->password;
-            if ($password == $db_password) {
+            if (password_verify($password, $db_password)) {
+                // if ($db_password == $password) {
                 return $row;
             } else {
                 return false;

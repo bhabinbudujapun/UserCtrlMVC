@@ -29,35 +29,32 @@ class Database
     // Prepare statement with query
     public function query($sql)
     {
-        $this->stmt = $this->dbh->prepare($sql);
+       return $this->stmt = $this->dbh->prepare($sql);
     }
 
     // Bind statement with query
     public function bind($param, $value)
     {
-        $this->stmt->bindValue($param, $value);
+        $this->stmt->bindParam($param, $value);
     }
 
     // Execute the prepared statement
     public function execute()
     {
-        return $this->stmt->execute();
+       return $this->stmt->execute();
     }
 
+    // Execute and fetch single user information
     public function singleResult()
     {
         $this->execute();
         return $this->stmt->fetch(PDO::FETCH_OBJ);
     }
 
-    public function resultSet(){
+    // Execute and fetch all user information
+    public function resultSet()
+    {
         $this->execute();
         return $this->stmt->fetchAll(PDO::FETCH_OBJ);
     }
-
-    // Get row count
-    // public function rowCount()
-    // {
-    //     return $this->stmt->rowCount();
-    // }
 }

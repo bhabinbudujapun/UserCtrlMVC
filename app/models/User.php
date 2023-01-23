@@ -7,11 +7,26 @@ class User
         $this->dbh = new Database;
     }
 
-    public function getUsers()
+    public function getUsers($agrs)
     {
-        $this->dbh->query("SELECT * FROM user");
+        // var_dump(func_get_args());
+        // die;
+        $limit = 5;
+        $total_records = $this->getTotalRecords();
+        $total_pages = ceil($total_records / $limit);
+        $start = $agrs;
+        if ($total_pages == 0) {
+        }
+        $this->dbh->query("SELECT * FROM user LIMIT $start, $limit");
         $result = $this->dbh->resultSet();
         return $result;
+    }
+
+    public function getTotalRecords()
+    {
+        $this->dbh->query("SELECT * FROM user");
+        $total = $this->dbh->totalRecords();
+        return $total;
     }
 
     public function getSingleUser($id)

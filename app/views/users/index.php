@@ -45,8 +45,25 @@
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="1">
+                <td colspan="2">
                     <a href="<?php echo URLROOT; ?>/users/add" class="btn btn-success">Add</a>
+                </td>
+                <td colspan="5" class="text-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item ">
+                                <a class="page-link" href="<?= URLROOT; ?>/index?page=11" tabindex="-1">Previous</a>
+                            </li>
+                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">2</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
                 </td>
             </tr>
         </tfoot>

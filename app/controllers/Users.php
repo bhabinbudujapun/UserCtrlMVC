@@ -18,8 +18,14 @@ class Users extends Controller
 
     public function index()
     {
-        $data = $this->userModel->getUsers();
-        $this->view('users/index', $data);
+        $start_page = 0;
+        if (func_get_args()) {
+            $start_page = (int)func_get_arg(1);
+        } else {
+            // $totalRecords = $this->userModel->getTotalRecords($pageNo);
+            $data = $this->userModel->getUsers($start_page);
+            $this->view('users/index', $data);
+        }
     }
 
     public function add()

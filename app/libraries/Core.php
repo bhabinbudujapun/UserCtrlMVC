@@ -9,7 +9,8 @@ class Core
     public function __construct()
     {
         $url = $this->getUrl();
-
+        // var_dump($url);
+        // die;
         // Look in controllers for first value
         if (isset($url[0]) && file_exists('./app/controllers/' . ucwords($url[0]) . '.php')) {
             $this->currentController = ucwords($url[0]);
@@ -44,6 +45,15 @@ class Core
         if (isset($_GET['url'])) {
             $url = rtrim($_GET['url'], '/');
             $url = explode('/', $url);
+
+            $result = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+
+            if ($result != null) {
+                parse_str($result, $params);
+                // $result = array('page', $params['page']);
+                // array_push($url, $result);
+                array_push($url, 'page', $params['page']);
+            }
             return $url;
         }
     }

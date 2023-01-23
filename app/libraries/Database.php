@@ -29,7 +29,7 @@ class Database
     // Prepare statement with query
     public function query($sql)
     {
-       return $this->stmt = $this->dbh->prepare($sql);
+        return $this->stmt = $this->dbh->prepare($sql);
     }
 
     // Bind statement with query
@@ -41,7 +41,14 @@ class Database
     // Execute the prepared statement
     public function execute()
     {
-       return $this->stmt->execute();
+        return $this->stmt->execute();
+    }
+
+    // Execute and get total number of rows/records
+    public function totalRecords()
+    {
+        $this->execute();
+        return $this->stmt->rowCount();
     }
 
     // Execute and fetch single user information

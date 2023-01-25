@@ -7,19 +7,27 @@ class User
         $this->dbh = new Database;
     }
 
-    public function getUsers($agrs)
+    public function getUsers($args)
     {
-        // var_dump(func_get_args());
-        // die;
-        $limit = 5;
+        $start_page = $args;
+        $limit = 2;
         $total_records = $this->getTotalRecords();
-        $total_pages = ceil($total_records / $limit);
-        $start = $agrs;
-        if ($total_pages == 0) {
+        $total_page = (int)ceil($total_records / $limit);
+        $start_page = $args;
+        if (1 < $start_page && $start_page < $total_page) {
+            $start_page = ($start_page * $limit) - $limit;
+        } elseif ($start_page >= $total_page) {
+            $start_page = ($total_page - 1) * $limit;
+        } else {
+            $start_page = 0;
         }
-        $this->dbh->query("SELECT * FROM user LIMIT $start, $limit");
+        $this->dbh->query("SELECT * FROM user LIMIT $start_page, $limit");
         $result = $this->dbh->resultSet();
-        return $result;
+        $data = array(
+            $result,
+            array($total_page, $start_page, $args),
+        );
+        return $data;
     }
 
     public function getTotalRecords()

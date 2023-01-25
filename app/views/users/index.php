@@ -1,5 +1,28 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 
+<?php
+$users = $data[0];
+$total_page = $data[1][0];
+$start_page = $data[1][1];
+$current_page = $data[1][2];
+
+if ($current_page > $total_page || $current_page < 1) {
+    $current_page = $total_page;
+}
+
+if ($current_page == 1) {
+    $pre = 'disabled';
+} else {
+    $pre = 'active';
+}
+
+if ($current_page == $total_page) {
+    $next = 'disabled';
+} else {
+    $next = 'active';
+}
+
+?>
 <div class="container d-flex justify-content-center">
     <table class="table table-bordered table-hover">
         <thead>
@@ -16,12 +39,10 @@
         </thead>
         <tbody>
             <?php
-            $id = 0;
-            foreach ($data as $user) {
-                $id++;
+            foreach ($users as $user) {
             ?>
                 <tr>
-                    <td> <?php echo $id; ?> </td>
+                    <td> <?php echo $user->id; ?> </td>
                     <td> <?php echo $user->name; ?> </td>
                     <td> <?php echo $user->gender; ?> </td>
                     <td> <?php echo $user->email; ?> </td>
@@ -31,7 +52,7 @@
                     <td>
                         <div class="container">
                             <div class="row">
-                                <a data-toggle="modal" data-target="#viewModal" data-id="<?php echo $id; ?>" data-name="<?php echo $user->name; ?>" data-gender="<?php echo $user->gender; ?>" data-email="<?php echo $user->email; ?>" data-address="<?php echo $user->address; ?>" data-married="<?php echo $user->marital_status; ?>" data-created="<?php echo $user->created_at; ?>" class="btn btn-info float-right view">View</a>
+                                <a data-toggle="modal" data-target="#viewModal" data-id="<?php echo $user->id; ?>" data-name="<?php echo $user->name; ?>" data-gender="<?php echo $user->gender; ?>" data-email="<?php echo $user->email; ?>" data-address="<?php echo $user->address; ?>" data-married="<?php echo $user->marital_status; ?>" data-created="<?php echo $user->created_at; ?>" class="btn btn-info float-right view">View</a>
                                 <a href="<?php echo URLROOT; ?>/users/edit/<?php echo $user->id ?>" class="btn btn-primary">Edit</a>
                                 <form class="pull-right" action="<?php echo URLROOT; ?>/users/delete/<?php echo $user->id; ?>" method="post">
                                     <input type="hidden" name='id' value="<?php echo $user->id; ?>">
@@ -51,16 +72,25 @@
                 <td colspan="5" class="text-center">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item ">
-                                <a class="page-link" href="<?= URLROOT; ?>/index?page=11" tabindex="-1">Previous</a>
+                            <li class="page-item <?php echo $pre ?>">
+                                <a class="page-link" href="<?= URLROOT; ?>/users?page=<?php echo $current_page - 1 ?>" tabindex="-1">Previous</a>
                             </li>
-                            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">2</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
+                            <?php
+                            for ($i = 1; $i <= $total_page; $i++) {
+                                if ($i == $current_page) {
+                            ?>
+                                    <li class="page-item active">
+                                        <a class="page-link" href="<?= URLROOT; ?>/users?page=<?php echo $i ?>"><?php echo $i ?></a>
+                                    </li>
+                                <?php } else { ?>
+                                    <li class="page-item">
+                                        <a class="page-link" href="<?= URLROOT; ?>/users?page=<?php echo $i ?>"><?php echo $i ?></a>
+                                    </li>
+                            <?php
+                                }
+                            } ?>
+                            <li class="page-item <?php echo $next ?>">
+                                <a class="page-link" href="<?= URLROOT; ?>/users?page=<?php echo $current_page + 1 ?>">Next</a>
                             </li>
                         </ul>
                     </nav>

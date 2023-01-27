@@ -20,9 +20,18 @@ class Users extends Controller
     {
         $start_page = 0;
         if (!empty(func_get_args())) {
-            $start_page = (int)func_get_arg(1);
+            if (func_get_arg(0) == 'search') {
+                $name = func_get_arg(1);
+                $data = $this->userModel->getNames($name);
+            } elseif (func_get_arg(0) == 'page') {
+                $start_page = func_get_arg(1);
+                $data = $this->userModel->getUsers($start_page);
+            }
+        } else {
+            $data = $this->userModel->getUsers($start_page);
         }
-        $data = $this->userModel->getUsers($start_page);
+        // var_dump($data);
+        // die;
         $this->view('users/index', $data);
     }
 

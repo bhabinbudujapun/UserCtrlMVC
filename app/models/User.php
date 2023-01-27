@@ -1,6 +1,8 @@
 <?php
 class User
 {
+    protected $table = 'users';
+
     private $dbh;
     public function __construct()
     {
@@ -9,11 +11,19 @@ class User
 
     public function getUsers($args)
     {
+        // Checking Initial Parameters
+        if ($args == 0) {
+            $args = 1;
+        }
+
+        $limit = 3;
         $start_page = $args;
-        $limit = 2;
+
         $total_records = $this->getTotalRecords();
-        $total_page = (int)ceil($total_records / $limit);
+
+        $total_page = ceil($total_records / $limit);
         $start_page = $args;
+
         if (1 < $start_page && $start_page < $total_page) {
             $start_page = ($start_page * $limit) - $limit;
         } elseif ($start_page >= $total_page) {
@@ -21,11 +31,46 @@ class User
         } else {
             $start_page = 0;
         }
+
         $this->dbh->query("SELECT * FROM user LIMIT $start_page, $limit");
         $result = $this->dbh->resultSet();
+
+        if ($args > $total_page || $args < 1) {
+            $args = $total_page;
+        }
+
+        // For Previous Button
+        if ($args == 1) {
+            $prev = 'disabled';
+        } else {
+            $prev = 'active';
+        }
+
+        // For Next Button
+        if ($args == $total_page) {
+            $next = 'disabled';
+        } else {
+            $next = 'active';
+        }
+
         $data = array(
             $result,
-            array($total_page, $start_page, $args),
+            array($total_page, $args, $prev, $next),
+        );
+        return $data;
+    }
+
+    public function getNames($name)
+    {
+        $this->dbh->query("SELECT * FROM user WHERE name='$name'");
+        $result = $this->dbh->resultSet();
+        $total_page = 0;
+        $prev = 'disabled';
+        $next = 'disabled';
+        $args = 0;
+        $data = array(
+            $result,
+            array($total_page, $args, $prev, $next),
         );
         return $data;
     }
@@ -104,3 +149,12 @@ class User
         }
     }
 }
+
+// NOTES
+// class User extends BaseModel
+// $user_m = new User();
+// $user_m->get();
+// $user_m->get([
+//     'id' => 1
+// ]);
+// $user_m = new Product();

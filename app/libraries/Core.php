@@ -50,9 +50,13 @@ class Core
 
             if ($result != null) {
                 parse_str($result, $params);
-                // $result = array('page', $params['page']);
-                // array_push($url, $result);
-                array_push($url, 'page', $params['page']);
+                foreach ($params as $key => $value) {
+                    $key = $key;
+                    $value = $value;
+                }
+
+                // SEPERATING QUERY PAGE|SEARCH
+                array_push($url, $key, $value);
             }
             return $url;
         }

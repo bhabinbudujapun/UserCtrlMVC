@@ -3,26 +3,22 @@
 <?php
 $users = $data[0];
 $total_page = $data[1][0];
-$start_page = $data[1][1];
-$current_page = $data[1][2];
-
-if ($current_page > $total_page || $current_page < 1) {
-    $current_page = $total_page;
-}
-
-if ($current_page == 1) {
-    $pre = 'disabled';
-} else {
-    $pre = 'active';
-}
-
-if ($current_page == $total_page) {
-    $next = 'disabled';
-} else {
-    $next = 'active';
-}
-
+$current_page = $data[1][1];
+$prev = $data[1][2];
+$next = $data[1][3];
 ?>
+
+<div class="container mb-2">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="GET" action="<?= URLROOT; ?>/users" class="form-inline my-2 my-lg-0 float-right">
+                <input name='search' class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="container d-flex justify-content-center">
     <table class="table table-bordered table-hover">
         <thead>
@@ -72,7 +68,7 @@ if ($current_page == $total_page) {
                 <td colspan="5" class="text-center">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-center">
-                            <li class="page-item <?php echo $pre ?>">
+                            <li class="page-item <?php echo $prev ?>">
                                 <a class="page-link" href="<?= URLROOT; ?>/users?page=<?php echo $current_page - 1 ?>" tabindex="-1">Previous</a>
                             </li>
                             <?php

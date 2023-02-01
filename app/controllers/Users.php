@@ -26,9 +26,17 @@ class Users extends Controller
             } elseif (func_get_arg(0) == 'page') {
                 $start_page = func_get_arg(1);
                 $data = $this->userModel->getUsers($start_page);
+            } elseif (func_get_arg(0) == 'order') {
+                $order = func_get_arg(1);
+                if ($order == 'asc') {
+                    $data = $this->userModel->orderName();
+                } elseif ($order == 'date') {
+                    $data = $this->userModel->orderDate($order);
+                }
             }
         } else {
-            $data = $this->userModel->getUsers($start_page);
+            $this->userModel->add();
+            // $data = $this->userModel->getUsers($start_page);
         }
         // var_dump($data);
         // die;

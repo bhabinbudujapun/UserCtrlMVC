@@ -24,7 +24,12 @@ $next = $data[1][3];
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
+                <th scope="col">
+                    Name
+                    <a href="<?= URLROOT; ?>/users?order=asc" type="button" class="btn btn-light btn-sm float-right">
+                        <i class="fas fa-arrow-up"></i>
+                    </a>
+                </th>
                 <th scope="col">Gender</th>
                 <th scope="col">Email</th>
                 <th scope="col">Address</th>

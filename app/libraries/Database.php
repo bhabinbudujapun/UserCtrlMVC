@@ -6,8 +6,7 @@ class Database
     private $pass = DB_PASS;
     private $dbname = DB_NAME;
 
-    private $dbh;
-    private $stmt;
+    public $dbh;
 
     public function __construct()
     {
@@ -27,41 +26,41 @@ class Database
     }
 
     // Prepare statement with query
-    public function query($sql)
-    {
-        return $this->stmt = $this->dbh->prepare($sql);
-    }
+    // public function query($sql)
+    // {
+    //     return $this->stmt = $this->dbh->prepare($sql);
+    // }
 
     // Bind statement with query
-    public function bind($param, $value)
-    {
-        $this->stmt->bindParam($param, $value);
-    }
+    // public function bind($param, $value)
+    // {
+    //     $this->stmt->bindParam($param, $value);
+    // }
 
     // Execute the prepared statement
-    public function execute()
-    {
-        return $this->stmt->execute();
-    }
+    // public function execute()
+    // {
+    //     return $this->stmt->execute();
+    // }
 
     // Execute and get total number of rows/records
-    public function totalRecords()
-    {
-        $this->execute();
-        return $this->stmt->rowCount();
-    }
+    // public function totalRecords()
+    // {
+    //     $this->execute();
+    //     return $this->stmt->rowCount();
+    // }
 
     // Execute and fetch single user information
-    public function singleResult()
-    {
-        $this->execute();
-        return $this->stmt->fetch(PDO::FETCH_OBJ);
-    }
+    // public function singleResult()
+    // {
+    //     $this->execute();
+    //     return $this->stmt->fetch(PDO::FETCH_OBJ);
+    // }
 
     // Execute and fetch all user information
-    public function resultSet()
-    {
-        $this->execute();
-        return $this->stmt->fetchAll(PDO::FETCH_OBJ);
-    }
+    // public function resultSet()
+    // {
+    //     $this->execute();
+    //     return $this->stmt->fetchAll(PDO::FETCH_OBJ);
+    // }
 }

@@ -37,7 +37,7 @@ class Admin extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $email = $_POST['email'];
             $password = $_POST['password'];
-            $loginUser =  $this->rootModel->login($email, $password);
+            $loginUser =  $this->rootModel->viewSingle($email, $password);
 
             if ($loginUser) {
                 $this->createSession($loginUser);
@@ -52,6 +52,8 @@ class Admin extends Controller
     // Set the session
     public function createSession($user)
     {
+        //     var_dump($user);
+        //     die;
         $_SESSION['user_id'] = $user->id;
         $_SESSION['name'] = $user->name;
         $_SESSION['email'] = $user->email;

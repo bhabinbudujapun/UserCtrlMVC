@@ -2,7 +2,7 @@
 
 class Users extends Controller
 {
-    protected $rootModel;
+    // protected $rootModel;
     protected $userModel;
 
     public function __construct()
@@ -12,7 +12,7 @@ class Users extends Controller
         }
 
         // Instanc of model
-        $this->rootModel = $this->model('Root');
+        // $this->rootModel = $this->model('Root');
         $this->userModel = $this->model('User');
     }
 
@@ -35,7 +35,7 @@ class Users extends Controller
                 }
             }
         } else {
-            $this->userModel->add();
+            $data = $this->userModel->view($start_page);
             // $data = $this->userModel->getUsers($start_page);
         }
         // var_dump($data);
